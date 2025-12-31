@@ -3,6 +3,7 @@ import ConnectionStatus from '../components/ConnectionStatus';
 import DrawButton from '../components/DrawButton';
 import NumberHistory from '../components/NumberHistory';
 import BingoBoard from '../components/BingoBoard';
+import AudioPlayer from '../components/AudioPlayer';
 
 export default function HostView() {
   const {
@@ -92,7 +93,7 @@ export default function HostView() {
           </div>
 
           {/* Statistics */}
-          <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+          <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto mb-6">
             <div className="p-4 bg-gray-50 rounded-lg">
               <div className="text-2xl font-bold text-gray-900">{drawnCount}</div>
               <div className="text-sm text-gray-600">Drawn</div>
@@ -105,6 +106,11 @@ export default function HostView() {
               <div className="text-2xl font-bold text-gray-900">{progress}%</div>
               <div className="text-sm text-gray-600">Progress</div>
             </div>
+          </div>
+
+          {/* Audio Controls */}
+          <div className="border-t pt-6">
+            <AudioPlayer trigger={currentNumber} />
           </div>
         </div>
 

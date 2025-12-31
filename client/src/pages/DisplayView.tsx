@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSocket } from '../hooks/useSocket';
+import AudioPlayer from '../components/AudioPlayer';
 
 export default function DisplayView() {
   const { connectionStatus, gameState } = useSocket();
@@ -41,6 +42,11 @@ export default function DisplayView() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
+      {/* Hidden Audio Player - plays sound when number drawn */}
+      <div className="hidden">
+        <AudioPlayer trigger={currentNumber} />
+      </div>
+
       {/* Connection Status Indicator */}
       <div className="absolute top-4 right-4 z-10">
         <div
