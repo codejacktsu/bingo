@@ -36,7 +36,8 @@ app.use(cors({ origin: config.corsOrigin }));
 app.use(express.json());
 
 // Serve static files from client build (in production)
-const clientBuildPath = path.join(__dirname, '../../client/dist');
+// __dirname is server/dist/server/src, so we need to go up 4 levels to project root, then to client/dist
+const clientBuildPath = path.join(__dirname, '../../../../client/dist');
 app.use(express.static(clientBuildPath));
 
 // Health check endpoint

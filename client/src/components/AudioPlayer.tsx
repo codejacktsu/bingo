@@ -16,13 +16,15 @@ interface AudioPlayerProps {
  */
 export default function AudioPlayer({ trigger, audioUrl = '/sounds/draw.mp3' }: AudioPlayerProps) {
   const { play, settings, setVolume, toggleMute } = useAudio(audioUrl);
-  const [useFileAudio, setUseFileAudio] = useState(true);
+  const [useFileAudio, setUseFileAudio] = useState(false);
 
   // Check if audio file exists on mount
   useEffect(() => {
     checkAudioFile(audioUrl).then((exists) => {
       setUseFileAudio(exists);
-      if (!exists) {
+      if (exists) {
+        console.info('Audio file found, using file audio');
+      } else {
         console.info('Audio file not found, using Web Audio API fallback');
       }
     });
@@ -31,12 +33,16 @@ export default function AudioPlayer({ trigger, audioUrl = '/sounds/draw.mp3' }: 
   // Play sound when trigger changes (e.g., new number drawn)
   useEffect(() => {
     if (trigger !== null && trigger !== undefined) {
+      console.log('🔊 Audio trigger:', trigger, 'useFile:', useFileAudio, 'settings:', settings);
       if (useFileAudio) {
         play();
       } else {
         // Fallback to Web Audio API
         if (settings.enabled && !settings.muted) {
+          console.log('🔊 Playing Web Audio API beep at volume:', settings.volume);
           playDing(settings.volume);
+        } else {
+          console.log('🔇 Audio disabled or muted');
         }
       }
     }
