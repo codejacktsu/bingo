@@ -8,9 +8,11 @@ dotenv.config();
 /**
  * Detects and returns the local IP address of the server
  * Used to display the network access URL on startup
+ * Prioritizes WiFi and Ethernet adapters, skips virtual adapters
  */
 export function getLocalIpAddress(): string {
   const interfaces = os.networkInterfaces();
+  const addresses: { name: string; address: string; priority: number }[] = [];
 
   for (const name of Object.keys(interfaces)) {
     const networkInterface = interfaces[name];
@@ -19,9 +21,41 @@ export function getLocalIpAddress(): string {
     for (const iface of networkInterface) {
       // Skip internal (loopback) and non-IPv4 addresses
       if (iface.family === 'IPv4' && !iface.internal) {
-        return iface.address;
+        // Determine priority based on interface name
+        let priority = 0;
+        const nameLower = name.toLowerCase();
+
+        // Skip virtual adapters (VirtualBox, VMware, Docker, WSL)
+        if (
+          nameLower.includes('virtualbox') ||
+          nameLower.includes('vmware') ||
+          nameLower.includes('vboxnet') ||
+          nameLower.includes('vethernet') ||
+          nameLower.includes('docker') ||
+          nameLower.includes('wsl') ||
+          nameLower.includes('host-only')
+        ) {
+          continue; // Skip virtual adapters
+        }
+
+        // Prioritize WiFi and Ethernet adapters
+        if (nameLower.includes('wi-fi') || nameLower.includes('wireless')) {
+          priority = 10; // Highest priority for WiFi
+        } else if (nameLower.includes('ethernet') || nameLower.includes('local area connection')) {
+          priority = 9; // Second priority for Ethernet
+        } else {
+          priority = 5; // Lower priority for other interfaces
+        }
+
+        addresses.push({ name, address: iface.address, priority });
       }
     }
+  }
+
+  // Sort by priority (highest first) and return the best address
+  if (addresses.length > 0) {
+    addresses.sort((a, b) => b.priority - a.priority);
+    return addresses[0].address;
   }
 
   return 'localhost';
