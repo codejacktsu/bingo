@@ -1,0 +1,33 @@
+{
+  "name": "bingo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local Network Bingo Game Application",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix server && npm run build --prefix client",
+    "start": "npm run start --prefix server",
+    "lint": "npm run lint --prefix server && npm run lint --prefix client",
+    "test": "npm run test --prefix server && npm run test --prefix client"
+  },
+  "keywords": [
+    "bingo",
+    "game",
+    "websocket",
+    "local-network"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "prettier": "^3.2.4",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "eslint": "^8.56.0"
+  }
+}
