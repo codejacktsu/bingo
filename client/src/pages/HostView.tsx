@@ -1,9 +1,12 @@
 import { useSocket } from '../hooks/useSocket';
+import { useToast } from '../hooks/useToast';
 import ConnectionStatus from '../components/ConnectionStatus';
 import DrawButton from '../components/DrawButton';
 import NumberHistory from '../components/NumberHistory';
 import BingoBoard from '../components/BingoBoard';
 import AudioPlayer from '../components/AudioPlayer';
+import LoadingSpinner from '../components/LoadingSpinner';
+import ToastContainer from '../components/ToastContainer';
 
 export default function HostView() {
   const {
@@ -16,6 +19,14 @@ export default function HostView() {
     drawNumber,
     resetGame,
   } = useSocket();
+  const { toasts, addToast, removeToast } = useToast();
+
+  const handleDrawNumber = () => {
+    drawNumber();
+    if (gameState?.remainingNumbers.length === 1) {
+      addToast('Last number drawn!', 'info');
+    }
+  };
 
   const handleReset = () => {
     if (
@@ -24,6 +35,7 @@ export default function HostView() {
       )
     ) {
       resetGame();
+      addToast('Game reset successfully', 'success');
     }
   };
 
@@ -32,8 +44,20 @@ export default function HostView() {
   const currentNumber = gameState?.currentNumber;
   const progress = ((drawnCount / 75) * 100).toFixed(1);
 
+  // Show loading state while connecting and waiting for initial game state
+  if (connectionStatus === 'connecting' || (connected && !gameState)) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <LoadingSpinner size="lg" text="Connecting to game server..." />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Toast Notifications */}
+      <ToastContainer toasts={toasts} onRemove={removeToast} />
+
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -62,7 +86,8 @@ export default function HostView() {
         <div className="mb-8 bg-white rounded-xl shadow-lg p-8 text-center">
           <h2 className="text-lg font-semibold text-gray-600 mb-4">Current Number</h2>
           <div
-            className="text-15vh font-bold text-blue-600 mb-6"
+            key={currentNumber || 'empty'}
+            className="text-15vh font-bold text-blue-600 mb-6 animate-pulse-scale"
             style={{ lineHeight: '1' }}
           >
             {currentNumber || '—'}
@@ -71,7 +96,7 @@ export default function HostView() {
           {/* Control Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
             <DrawButton
-              onClick={drawNumber}
+              onClick={handleDrawNumber}
               disabled={!connected || remainingCount === 0}
               remaining={remainingCount}
             />

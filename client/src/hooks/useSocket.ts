@@ -16,13 +16,16 @@ import type { GameState, ConnectionStatus } from '@shared/types/game.types';
  */
 export function useSocket(serverUrl?: string) {
   const [connected, setConnected] = useState(false);
-  const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('disconnected');
+  const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('connecting');
   const [gameState, setGameState] = useState<GameState | null>(null);
   const [connectionCount, setConnectionCount] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [reconnectAttempt, setReconnectAttempt] = useState(0);
 
   useEffect(() => {
+    // Set connecting status
+    setConnectionStatus('connecting');
+
     // Connect to server
     socketService.connect({
       reconnectionAttempts: 10,

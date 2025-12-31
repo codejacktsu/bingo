@@ -27,19 +27,26 @@ export default function NumberHistory({ drawnNumbers, currentNumber }: NumberHis
 
   return (
     <div className="w-full">
-      <h3 className="text-lg font-semibold mb-3 text-gray-800">
+      <h3
+        id="number-history-heading"
+        className="text-lg font-semibold mb-3 text-gray-800"
+      >
         Number History ({drawnNumbers.length} drawn)
       </h3>
       <div
         ref={containerRef}
         className="flex gap-2 overflow-x-auto pb-2 scroll-smooth"
         style={{ scrollbarWidth: 'thin' }}
+        role="list"
+        aria-labelledby="number-history-heading"
       >
         {drawnNumbers.map((number, index) => {
           const isCurrent = number === currentNumber;
           return (
             <div
               key={`${number}-${index}`}
+              role="listitem"
+              aria-label={isCurrent ? `Current number: ${number}` : `Number ${number}`}
               className={`
                 flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14
                 flex items-center justify-center

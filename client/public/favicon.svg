@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#2563eb" stroke="#1e40af" stroke-width="2"/>
+
+  <!-- Bingo card representation -->
+  <rect x="20" y="25" width="60" height="50" fill="#ffffff" rx="4"/>
+
+  <!-- Grid lines -->
+  <line x1="32" y1="25" x2="32" y2="75" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="44" y1="25" x2="44" y2="75" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="56" y1="25" x2="56" y2="75" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="68" y1="25" x2="68" y2="75" stroke="#e5e7eb" stroke-width="1"/>
+
+  <line x1="20" y1="35" x2="80" y2="35" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="20" y1="45" x2="80" y2="45" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="20" y1="55" x2="80" y2="55" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="20" y1="65" x2="80" y2="65" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Some marked numbers (green dots) -->
+  <circle cx="26" cy="30" r="3" fill="#22c55e"/>
+  <circle cx="38" cy="40" r="3" fill="#22c55e"/>
+  <circle cx="50" cy="50" r="3" fill="#22c55e"/>
+  <circle cx="62" cy="60" r="3" fill="#22c55e"/>
+  <circle cx="74" cy="70" r="3" fill="#22c55e"/>
+</svg>

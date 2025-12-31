@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSocket } from '../hooks/useSocket';
 import AudioPlayer from '../components/AudioPlayer';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function DisplayView() {
-  const { connectionStatus, gameState } = useSocket();
+  const { connectionStatus, gameState, connected } = useSocket();
   const [showFullscreenHint, setShowFullscreenHint] = useState(true);
 
   const currentNumber = gameState?.currentNumber;
@@ -39,6 +40,18 @@ export default function DisplayView() {
         return 'bg-gray-500';
     }
   };
+
+  // Show loading state while connecting and waiting for initial game state
+  if (connectionStatus === 'connecting' || (connected && !gameState)) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <LoadingSpinner size="lg" theme="dark" text="" />
+          <p className="text-white text-2xl mt-6">Connecting to game server...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">

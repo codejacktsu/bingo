@@ -115,7 +115,7 @@ export interface NumberDrawnPayload {
 /**
  * Connection status states
  */
-export type ConnectionStatus = 'connected' | 'disconnected' | 'reconnecting';
+export type ConnectionStatus = 'connecting' | 'connected' | 'disconnected' | 'reconnecting';
 
 /**
  * Audio settings
