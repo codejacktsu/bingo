@@ -46,36 +46,50 @@ cp .env.example .env
 
 ### 3. Run the Application
 
-**Development Mode** (with hot reload):
+**Development Mode** (for development on Computer A only):
 ```bash
 npm run dev
 ```
+- Vite dev server: `http://localhost:5173` or `http://192.168.68.75:5173` (after Vite config update)
+- Backend server: `http://localhost:3001`
+- Hot reload enabled for faster development
 
-**Production Mode**:
+**Production Mode** (for actual games across network):
 ```bash
 npm run start
 ```
+- Server accessible on local network at displayed IP
 
-The server will display:
+The server will display your network IP:
 ```
 🎯 Bingo Game Server Running
-📡 Local access: http://localhost:3001
-🌐 Network access: http://192.168.1.100:3001
+📡 Local access:   http://localhost:3001
+🌐 Network access: http://192.168.68.75:3001  ← Use this IP
 
-Host Control: http://192.168.1.100:3001/host
-Display View: http://192.168.1.100:3001/display
+📍 Interfaces:
+   Host Control:  http://192.168.68.75:3001/host
+   Display View:  http://192.168.68.75:3001/display
 ```
 
 ### 4. Access the Interfaces
 
+**Development Mode:**
+- **Computer A only**: `http://localhost:5173/host` or `http://192.168.68.75:5173/host`
+
+**Production Mode (Recommended for actual games):**
+
 **Computer A (Office - Host):**
-- Open browser and navigate to: `http://localhost:3001/host`
-- Use the control interface to draw numbers and manage the game
+- Navigate to: `http://192.168.68.75:3001/host` (or use the IP shown by your server)
+- Control the game: draw numbers, reset, view statistics
 
 **Computer B (Living Room - Display):**
-- Open browser and navigate to: `http://<server-ip>:3001/display`
+- Navigate to: `http://192.168.68.75:3001/display` (use Computer A's IP)
 - Press F11 for fullscreen mode
-- Display will auto-connect and show game state
+- Display auto-updates when host draws numbers
+
+**Mobile Devices (Phone/Tablet):**
+- Navigate to: `http://192.168.68.75:3001/display`
+- Can be used as additional display screens
 
 ## Network Setup
 
