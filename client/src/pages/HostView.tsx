@@ -64,6 +64,12 @@ export default function HostView() {
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-gray-900">Bingo Game - Host Control</h1>
             <div className="flex items-center gap-4">
+              <a
+                href="/cards"
+                className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium text-sm"
+              >
+                🎴 Print Cards
+              </a>
               <div className="text-sm text-gray-600">
                 {connectionCount > 0 && `${connectionCount} device${connectionCount > 1 ? 's' : ''} connected`}
               </div>

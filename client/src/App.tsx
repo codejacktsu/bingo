@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import HostView from './pages/HostView';
 import DisplayView from './pages/DisplayView';
+import CardsView from './pages/CardsView';
 import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
           <Route path="/" element={<Navigate to="/host" replace />} />
           <Route path="/host" element={<HostView />} />
           <Route path="/display" element={<DisplayView />} />
+          <Route path="/cards" element={<CardsView />} />
           <Route path="*" element={<Navigate to="/host" replace />} />
         </Routes>
       </BrowserRouter>

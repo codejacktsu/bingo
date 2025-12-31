@@ -1,0 +1,374 @@
+/**
+ * Print Styles for Bingo Cards
+ * Optimized for printing on standard letter/A4 paper
+ */
+
+.cards-view {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+}
+
+/* Controls Section (hidden when printing) */
+.controls {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.controls-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.controls-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin: 0;
+}
+
+.controls-header p {
+  color: #666;
+  margin: 0.5rem 0 0;
+}
+
+.controls-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.control-group {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.control-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.control-group input,
+.control-group select {
+  padding: 0.5rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-width: 100px;
+}
+
+.control-group input:focus,
+.control-group select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background: #667eea;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-success {
+  background: #10b981;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.btn-secondary {
+  background: #6b7280;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+  transform: translateY(-2px);
+}
+
+.info-box {
+  background: #f3f4f6;
+  border-left: 4px solid #667eea;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.info-box p {
+  margin: 0;
+  color: #374151;
+  line-height: 1.6;
+}
+
+/* Cards Container */
+.cards-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page Layout */
+.page {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: grid;
+  gap: 1rem;
+}
+
+.page-1 {
+  grid-template-columns: 1fr;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.page-4 {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+/* Bingo Card Styles */
+.bingo-card {
+  border: 3px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.75rem;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  letter-spacing: 0.3em;
+  font-weight: 900;
+}
+
+.card-id {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.card-grid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-header {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-bottom: 3px solid #333;
+}
+
+.header-cell {
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.5rem;
+  border-right: 2px solid #333;
+}
+
+.header-cell:last-child {
+  border-right: none;
+}
+
+.header-b { color: #ef4444; }
+.header-i { color: #f59e0b; }
+.header-n { color: #10b981; }
+.header-g { color: #3b82f6; }
+.header-o { color: #8b5cf6; }
+
+.grid-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  flex: 1;
+  border-bottom: 2px solid #333;
+}
+
+.grid-row:last-child {
+  border-bottom: none;
+}
+
+.grid-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-right: 2px solid #333;
+  min-height: 60px;
+  color: #333;
+}
+
+.grid-cell:last-child {
+  border-right: none;
+}
+
+.free-space {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+/* Print Styles */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.5in;
+  }
+
+  body {
+    background: white !important;
+  }
+
+  .cards-view {
+    background: white !important;
+    padding: 0;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .page {
+    page-break-after: always;
+    margin: 0;
+    padding: 0.25in;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .page:last-child {
+    page-break-after: auto;
+  }
+
+  .bingo-card {
+    page-break-inside: avoid;
+    height: 100%;
+  }
+
+  .card-header {
+    background: #333 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .free-space {
+    background: #fbbf24 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .header-cell {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Adjust sizes for different layouts */
+  .page-1 .grid-cell {
+    min-height: 80px;
+    font-size: 2rem;
+  }
+
+  .page-2 .grid-cell {
+    min-height: 50px;
+    font-size: 1.3rem;
+  }
+
+  .page-4 .grid-cell {
+    min-height: 35px;
+    font-size: 1rem;
+  }
+
+  .page-4 .card-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .page-4 .header-cell {
+    font-size: 1rem;
+  }
+}
+
+/* Responsive Design for Screen Preview */
+@media screen and (max-width: 768px) {
+  .cards-view {
+    padding: 1rem;
+  }
+
+  .controls {
+    padding: 1rem;
+  }
+
+  .control-group {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .page-2,
+  .page-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .card-header h2 {
+    font-size: 1.5rem;
+  }
+}
