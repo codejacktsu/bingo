@@ -11,6 +11,7 @@ import type { GameState } from '../../shared/types/game.types.js';
  */
 export class BingoGameEngine {
   private drawnNumbers: Set<number>;
+  private drawnNumbersInOrder: number[]; // Track order of drawing
   private remainingNumbers: number[];
   private currentNumber: number | null;
   private gameId: string;
@@ -18,6 +19,7 @@ export class BingoGameEngine {
 
   constructor() {
     this.drawnNumbers = new Set();
+    this.drawnNumbersInOrder = [];
     this.remainingNumbers = [];
     this.currentNumber = null;
     this.gameId = this.generateGameId();
@@ -57,6 +59,7 @@ export class BingoGameEngine {
     // Pop the next number from the shuffled array
     const number = this.remainingNumbers.pop()!;
     this.drawnNumbers.add(number);
+    this.drawnNumbersInOrder.push(number); // Maintain drawing order
     this.currentNumber = number;
 
     return number;
@@ -71,6 +74,7 @@ export class BingoGameEngine {
    */
   public reset(): void {
     this.drawnNumbers.clear();
+    this.drawnNumbersInOrder = [];
     this.currentNumber = null;
     this.gameId = this.generateGameId();
     this.startTime = Date.now();
@@ -88,7 +92,7 @@ export class BingoGameEngine {
    */
   public getState(): GameState {
     return {
-      drawnNumbers: Array.from(this.drawnNumbers).sort((a, b) => a - b),
+      drawnNumbers: [...this.drawnNumbersInOrder], // Return in drawing order
       remainingNumbers: [...this.remainingNumbers], // Create copy to prevent external modification
       currentNumber: this.currentNumber,
       gameStarted: this.drawnNumbers.size > 0,
@@ -140,9 +144,9 @@ export class BingoGameEngine {
   }
 
   /**
-   * Gets all drawn numbers in sorted order
+   * Gets all drawn numbers in drawing order
    */
   public getDrawnNumbers(): number[] {
-    return Array.from(this.drawnNumbers).sort((a, b) => a - b);
+    return [...this.drawnNumbersInOrder];
   }
 }
